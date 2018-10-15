@@ -1,0 +1,51 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Planer app{% endblock title %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+        {% bootstrap_css %}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'CSS/base.css' %}" rel='stylesheet'>
+    </head>
+    <body class='bg-light bg'>
+        <nav class='navbar navbar-expand navbar-dark bg-primary mb-4' >
+            <a class='navbar-brand' href="{% url 'home' %}">Planer app</a>
+            <div class='collapse navbar-collapse'>
+            {% if user.is_authenticated %}
+                <ul class='navbar-nav ml-auto'>
+                    <li class='nav-item'>
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" 
+                        aria-haspopup="true" aria-expanded="false">
+                            {{user.username}}
+                        </a>
+                        <div class='dropdown-menu dropdown-menu-right' aria-labelledby='userMenu'>
+                            <a class='dropdown-item' href="{% url 'password_change' %}">Promeni lozinku</a>
+                            <div class='dropdown-divider'></div>    
+                            <a class='dropdown-item' href="{% url 'logout' %}">Odjavi se</a>
+                        </div>
+                    </li>
+                </ul>
+            {% else %}
+                <form class='form-inline ml-auto'>
+                    <a href="{% url 'login' %}" class='btn btn-outline-light'>Uloguj se</a>
+                    <a href="{% url 'registracija' %}" class='btn btn-dark ml-2'>Registruj se</a>
+                </form>
+            {% endif %}
+            </div>
+        </nav>
+        <div class='container'>
+        {% block content %}
+        {% endblock content %}
+        </div>
+        <footer class="footer mt-4 text-center">
+            <div><p class='text-white'>© 2018 Copyright:
+                <a href="{% url 'home' %}" class='text-white'>Planer app</a></p>
+            </div>
+        </footer>
+    {% bootstrap_javascript jquery='full' %}
+    </body>   
+</html>

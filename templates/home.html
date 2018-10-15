@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<h2>&#352ta &#382elite da uradite danas?</h2>
+<form method='post' class='mb-4'>
+    {% csrf_token %}
+    {% bootstrap_form forma%}
+</form>
+{% for planer in planeri %}
+<div class='container'>
+    <div class="row mt-2">
+        {% if planer.zavrsen %}
+        <div class="col-11 bg-secondary card">
+            <strike class='h3 text-white'>{{planer.tekst}}</strike>
+        </div>
+        <div class="col-1">
+            <a type='button' href="{% url 'obrisi' planer.id %}" class='btn btn-danger text-white btn-circle' title="Ukloni sa liste">
+                <i class="material-icons">
+                delete
+                </i>
+            </a>
+        </div>
+        {% else %}
+        <div class="col-11 card">
+            <p class='h3'>{{planer.tekst}}</p>
+        </div>
+        <div class="col-1">
+            <a type='button' href="{% url 'zavrsen' planer.id %}" class='btn btn-success text-white' title="Gotovo">
+                <i class="material-icons">
+                done
+                </i>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% empty %}
+Nemate ništa uneto. Sve što ste planirali ste i uradili :)
+{% endfor %}
+{% if planeri %}
+    <br><p class='text-right'><a type='button' href="{% url 'obrisi_sve' %}" class='btn btn-danger text-white mr-md-4'>
+    Ukloni sve zavr&#353ene</a></p>
+{% endif %}
+{% endblock content %}

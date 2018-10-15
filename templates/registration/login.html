@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center">Uloguj se</h2><br>
+    <center>  
+        <form method='post'>
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class='btn btn-success' type='submit'>Uloguj se</button>
+        </form>
+        <br><a href="{% url 'password_reset' %}">Zaboravili ste lozinku?</a>
+    </center>
+{% endblock content %}
