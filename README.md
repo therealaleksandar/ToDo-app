@@ -1,4 +1,5 @@
 # ToDo-app
+Live version: https://planer-app.herokuapp.com/<br>
 git clone https://github.com/therealaleksandar/ToDo-app<br>
 cd ToDo-app<br>
 pipenv install django<br>
